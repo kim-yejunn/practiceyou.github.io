@@ -1,0 +1,137 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 80vh;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.gpt-profile {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f4f4f9;
+}
+
+.gpt-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.gpt-profile .profile-name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+#chat-box {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-box div {
+    margin-bottom: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    text-align: right;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: 0;
+    display: inline-block;
+    clear: both;
+    animation: fadeInRight 0.5s ease;
+}
+
+.gpt-message {
+    text-align: left;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 0;
+    margin-right: auto;
+    display: inline-block;
+    clear: both;
+    animation: fadeInLeft 0.5s ease;
+}
+
+.chat-input-box {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding: 10px;
+    background-color: #f4f4f9;
+}
+
+#user-message {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
