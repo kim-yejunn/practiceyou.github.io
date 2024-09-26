@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/submit.css')}}">
+
+</head>
+<body>
+    <div class="main_form">
+        <div class="head_title">
+            <h1>마지막으로 {{name}}이랑</h1>
+            <h1>대화한 내용을 보여줘!</h1><br>    
+            <p>카카오톡 대화방 - 오른쪽 위 메뉴 - 설정 버튼 - 대화내용 내보내기 - 모든 텍스트 내부저장소에 저장 후 Documents/Kakaotalk에 저장된 txt 파일을 올려주면 돼!
+                (아이폰일 경우 zip파일을 더블클릭해서 풀어줘야 해)</p>
+        </div>
+        <div class="foot_form">
+            <form action="/fileupload/" id="file_upload" method="POST" enctype="multipart/form-data">
+                <input type="file" id="savefile" name="savefile" accept=".txt" multiple>
+                <div style="display: flex; width:80%;">
+                    <div id="file-name-display" class="file-name-display"></div>
+                    <label for="savefile" class="file-label">파일 선택</label>
+                </div>
+                    <button type="submit">제출</button>
+            </form> 
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/submit.js') }}"></script>
+
+</body>
+
+</html>
