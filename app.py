@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, Blueprint, send_file, redirec
 from openai import OpenAI
 
 # gpt api 키
-client = OpenAI(api_key="your_api_key")
-
+client = OpenAI(api_key= os.environ.get('api_key'))
 
 # 실행 함수
 def create_app():
