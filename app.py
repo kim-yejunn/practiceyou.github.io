@@ -79,6 +79,46 @@ def limit_tokens_from_recent(filterfile, max_tokens=19000):
     
     return filterfile
 
+def gpt_response(filterfile, name, user_message=None):
+    chat_history = load_chat_history(name)
+    myname = session.get('myname')
+
+    if not chat_history:
+        try:
+            with open(filterfile, 'r', encoding='utf-8') as f:
+                filtered_data = f.read()
+        except Exception as e:
+            return
+
+        chat_history.append({
+            "role": "system",
+            "content": f"From now on, you are {name}. Your task is to respond exactly as {name} would in a real conversation with {myname}. \
+                        Pay close attention to the tone, sentence length, typos, and even emoticons that {name} uses. The following is a reference of how {name} typically communicates:\n\n{filtered_data}"
+        })
+
+    if user_message:
+        chat_history.append({
+            "role": "user",
+            "content": user_message
+        })
+
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=chat_history
+        )
+        gpt_reply = completion.choices[0].message.content
+        chat_history.append({
+            "role": "assistant",
+            "content": gpt_reply
+        })
+        
+        save_chat_history(chat_history, name)
+
+        return gpt_reply
+    except Exception as e:
+        return None
+
 # 실행 함수
 def create_app():
     app = Flask(__name__)
