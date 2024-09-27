@@ -19,10 +19,19 @@ def load_chat_history(name):
             chat_history = json.load(f)
         return chat_history
     return []
-
-# 실행 함수
-def create_app():
-    app = Flask(__name__)
+def extraction():
+    filenames = os.listdir(Upload_Folder)
+    
+    filepathtosave = os.path.join(Upload_Folder, 'merge.txt')
+    
+    with open(filepathtosave, 'w') as f:
+        for filename in filenames:
+            filepath = os.path.join(Upload_Folder, filename)
+            with open(filepath, 'r') as file:
+                data = file.read()
+                f.write(data)
+        
+    return filepathtosave
 
 
 def limit_tokens_from_recent(filterfile, max_tokens=19000):
