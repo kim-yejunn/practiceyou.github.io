@@ -122,6 +122,30 @@ def gpt_response(filterfile, name, user_message=None):
 # 실행 함수
 def create_app():
     app = Flask(__name__)
+@app.route('/myname')
+def myname():
+    return render_template('myname.html')
+
+@app.route('/myname/submit')
+def submit_myname():
+    myname = request.args.get('myname')
+    session['myname'] = myname
+    return redirect(url_for('yourname'))
+
+@app.route('/yourname')
+def yourname():
+    return render_template('yourname.html')
+
+@app.route('/yourname/submit')
+def submit():
+    global name
+    name = request.args.get('name')
+    session['name'] = name
+    return redirect(url_for('fileupload.upload_file'))
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
     
      # 세션을 사용하기 위한 비밀 키 설정
