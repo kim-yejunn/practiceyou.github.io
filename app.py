@@ -3,7 +3,10 @@ from flask import Flask, render_template, request, Blueprint, send_file, redirec
 from openai import OpenAI
 
 # gpt api 키
+name = ""
+Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
 client = OpenAI(api_key= os.environ.get('api_key'))
+
 
 # 실행 함수
 def create_app():
