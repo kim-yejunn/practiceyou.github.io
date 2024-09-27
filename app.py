@@ -33,6 +33,35 @@ def extraction():
         
     return filepathtosave
 
+def filter_chat(filepathtosave, name):
+    if not os.path.exists(filepathtosave):
+        return
+    
+    try:
+        with open(filepathtosave, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+    except Exception as e:
+        return
+
+    filtered_chat = []
+    for line in lines:
+        parts = line.strip().split(',', 2)
+        if len(parts) == 3:
+            _, user, message = parts
+            user = user.strip('"')
+            message = message.strip('"')
+            if message:
+                filtered_chat.append(f"{user}: {message}")
+
+    filterfile = os.path.join(os.path.dirname(filepathtosave), 'filtered_chat.txt')
+    try:
+        with open(filterfile, 'w', encoding='utf-8') as file:
+            file.write("\n".join(filtered_chat))
+        limit_tokens_from_recent(filterfile)
+    except Exception as e:
+        return
+    
+    return filterfile
 
 def limit_tokens_from_recent(filterfile, max_tokens=19000):
     with open(filterfile, 'r', encoding='utf-8') as file:
