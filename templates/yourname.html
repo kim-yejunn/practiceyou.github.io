@@ -1,16 +1,29 @@
+<!-- templates/myname.html -->
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>이름을 입력하세요.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/yourname.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1 style="text-align: center;">상대의 이름을 입력하세요.</h1>
-    <p style="text-align: center;">카카오톡에 입력된 상대 이름을 입력해주세요</p>
-    <form style="text-align: center;" action="/yourname/submit" method="GET">
-        <input type="text" name="name" placeholder="이름 입력">
-        <button type="submit">제출</button>
-    </form>
+    <div class="container">
+        <div class="your_name"> 
+            <h1 style="text-align: center;">상대의 이름을 입력하세요.</h1>
+            <p style="text-align: center;">카카오톡에 입력된 상대 이름을 입력해주세요</p>
+        </div>
+        <form style="text-align: center;" action="/yourname/submit" method="get">
+            <input type="text" id="yourname" name="yourname" required>
+            <button type="submit">제출</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/yourname.js') }}"></script>
+
 </body>
 </html>
+
