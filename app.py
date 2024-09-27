@@ -6,7 +6,7 @@ from openai import OpenAI
 name = ""
     # 현재 파일(app.py)이 있는 디렉토리 기준으로 'upload' 폴더 경로 설정
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
-    # gpt api 키
+    # gpt api 키(.env 파일에 gpt api 키 저장 후 실행)
 client = OpenAI(api_key= os.environ.get('api_key'))
 
 # 토큰 마지막 내용 19000개로 제한
