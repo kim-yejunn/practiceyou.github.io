@@ -7,7 +7,6 @@ html{
 body{
         /* background: #FFDFDE; */
     width:400px;
-    
 }
 .container{
     margin-top:100px;
@@ -46,7 +45,8 @@ body{
     padding-left: 20px;
     padding-right:20px;
     border:none;
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
+    background-color: #DDDDDD;
     width:160px;
     height:25px;
     color:#6A7BA2;
@@ -57,9 +57,16 @@ body{
 }
 
 .container form button{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
     border-radius: 100px;
     border:none;
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
+    background-color: #DDDDDD;
     width:50px;
     height:31px;
     margin-left:10px;
@@ -67,10 +74,12 @@ body{
     font-family: "Jua", system-ui;
     font-size: 16px;
     color:#6A7BA2;
+    cursor: pointer;
 
 }
 .container form button:hover{
-    background-color: #DDDDDD;
+    /* background-color: #DDDDDD; */
+    background-color: #EEEEEE;
 }
 
 
