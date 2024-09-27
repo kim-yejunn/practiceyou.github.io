@@ -7,6 +7,24 @@ name = ""
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
 client = OpenAI(api_key= os.environ.get('api_key'))
 
+def save_chat_history(chat_history, name):
+    chat_file = os.path.join(Upload_Folder, f'{name}_chat_history.json')
+    with open(chat_file, 'w', encoding='utf-8') as f:
+        json.dump(chat_history, f)
+
+def load_chat_history(name):
+    chat_file = os.path.join(Upload_Folder, f'{name}_chat_history.json')
+    if os.path.exists(chat_file):
+        with open(chat_file, 'r', encoding='utf-8') as f:
+            chat_history = json.load(f)
+        return chat_history
+    return []
+
+# 실행 함수
+def create_app():
+    app = Flask(__name__)
+
+
 def limit_tokens_from_recent(filterfile, max_tokens=19000):
     with open(filterfile, 'r', encoding='utf-8') as file:
         data = file.read()
