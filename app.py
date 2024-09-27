@@ -7,10 +7,26 @@ name = ""
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
 client = OpenAI(api_key= os.environ.get('api_key'))
 
+def limit_tokens_from_recent(filterfile, max_tokens=19000):
+    with open(filterfile, 'r', encoding='utf-8') as file:
+        data = file.read()
+
+    enc = tiktoken.get_encoding("cl100k_base")
+    tokens = enc.encode(data)
+
+    if len(tokens) > max_tokens:
+        tokens = tokens[-max_tokens:]
+        data = enc.decode(tokens)
+
+        with open(filterfile, 'w', encoding='utf-8') as file:
+            file.write(data)
+    
+    return filterfile
 
 # 실행 함수
 def create_app():
     app = Flask(__name__)
+
     
      # 세션을 사용하기 위한 비밀 키 설정
     app.secret_key = 'aa8pepole'  # 여기에 고유하고 비밀스러운 문자열을 넣으세요
