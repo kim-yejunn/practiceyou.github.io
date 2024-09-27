@@ -181,6 +181,23 @@ def result():
     name = session.get('name')
     return render_template('result.html', name=name)
 
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    global name
+    data = request.get_json()
+    user_message = data['message']
+
+    merge_file_path = os.path.join(Upload_Folder, 'merge.txt')
+    filter_file = filter_chat(merge_file_path, name)
+
+    if filter_file:
+        reply = gpt_response(filter_file, name, user_message)
+        if reply:
+            return {'reply': reply}
+        else:
+            return {'error': 'GPT 응답 생성 중 오류가 발생했습니다.'}
+    else:
+        return {'error': '필터링 파일 생성 중 오류가 발생했습니다.'}
 
 # 앱 실행
 if __name__ == '__main__':
