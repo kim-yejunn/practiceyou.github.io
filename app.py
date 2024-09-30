@@ -41,7 +41,7 @@ def load_chat_history(name):
         return chat_history
     return []
 
-# 업로드 된 파일 merge로 통합
+# 업로드 된 파일 merge로 통합하기
 def extraction():
     filenames = os.listdir(Upload_Folder)
     print(f"폴더 내 업로드 된 파일 이름: {filenames}")
