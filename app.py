@@ -1,9 +1,10 @@
-import os, csv, tiktoken, json, re
-from flask import Flask, render_template, request, Blueprint, send_file, redirect, url_for, session
+import os, tiktoken, json, re
+from flask import Flask, render_template, request, Blueprint, redirect, url_for, session
+from dotenv import load_dotenv
 from openai import OpenAI
 
-# 전역 변수
-name = ""
+load_dotenv()
+
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
 client = OpenAI(api_key=os.getenv('api_key'))
 
@@ -43,14 +44,14 @@ def load_chat_history(name):
 # 업로드 된 파일 merge로 통합
 def extraction():
     filenames = os.listdir(Upload_Folder)
-    print(f"폴더 내 업로드 된 파일 이름: {filenames}") 
+    print(f"폴더 내 업로드 된 파일 이름: {filenames}")
     
     filepathtosave = os.path.join(Upload_Folder, 'merge.txt')
     
-    with open(filepathtosave, 'w') as f:
+    with open(filepathtosave, 'w', encoding='utf-8') as f:
         for filename in filenames:
             filepath = os.path.join(Upload_Folder, filename)
-            with open(filepath, 'r') as file:
+            with open(filepath, 'r', encoding='utf-8') as file:
                 data = file.read()
                 f.write(data)
         
@@ -252,22 +253,18 @@ def create_app():
 
     @app.route('/yourname/submit')
     def submit():
-        global name
-        name = request.args.get('name')
-        session['name'] = name
+        session['name'] = request.args.get('name')
         return redirect(url_for('fileupload.upload_file'))
 
     @app.route('/send_message', methods=['POST'])
     def send_message():
-        global name
-        data = request.get_json()
-        user_message = data['message']
+        user_message = request.get_json()['message']
 
         merge_file_path = os.path.join(Upload_Folder, 'merge.txt')
-        filter_file = filter_chat(merge_file_path, name)
+        filter_file = filter_chat(merge_file_path, session['name'])
 
         if filter_file:
-            reply = gpt_response(filter_file, name, user_message)
+            reply = gpt_response(filter_file, session['name'], user_message)
             if reply:
                 return {'reply': reply}
             else:
