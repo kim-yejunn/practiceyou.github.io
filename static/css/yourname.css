@@ -1,0 +1,92 @@
+html{
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    justify-content: center;
+}
+
+
+body{
+    /* background: #FFDFDE; */
+width:400px;
+}
+
+.container{
+    margin-top:100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Jua", system-ui;
+
+}
+
+.container .your_name h1{
+    font-weight:400;
+    font-size: 40px;
+    color:#6A7BA2;
+
+}
+.container .your_name p{
+    margin:0;
+    font-size:18px;
+    font-weight: 200;
+    color:#6A7BA2;
+}
+
+.container form{
+    margin-top:50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container form input{
+    border-radius: 100px;
+    padding:3px;
+    padding-left: 20px;
+    padding-right:20px;
+    border:none;
+    /* background-color: #FFFFFF; */
+    background-color: #DDDDDD;
+    width:160px;
+    height:25px;
+    color:#6A7BA2;
+}
+.container form input:focus{
+    outline:none;
+}
+
+.container form button{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 100px;
+    border:none;
+    /* background-color: #FFFFFF; */
+    background-color: #DDDDDD;
+    width:50px;
+    height:31px;
+    margin-left:10px;
+    transition:0.3s;
+    font-family: "Jua", system-ui;
+    font-size: 16px;
+    color:#6A7BA2;
+    cursor: pointer;
+
+}
+.container form button:hover{
+    /* background-color: #DDDDDD; */
+    background-color: #EEEEEE;
+}
+
+
+
+
+.container img{
+    width:400px;
+    height: 400px;
+    opacity: 0.3;
+}
