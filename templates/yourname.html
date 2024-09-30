@@ -18,9 +18,11 @@
             <p style="text-align: center;">카카오톡에 입력된 상대 이름을 입력해주세요</p>
         </div>
         <form style="text-align: center;" action="/yourname/submit" method="get">
-            <input type="text" id="yourname" name="yourname" required>
+            <input type="text" id="name" name="name" required>
             <button type="submit">제출</button>
         </form>
+        <!-- <img src="{{ url_for('static',filename='image/CherryBlossom.png')}}" alt=""> -->
+
     </div>
     <script src="{{ url_for('static', filename='js/yourname.js') }}"></script>
 
