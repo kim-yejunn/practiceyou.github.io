@@ -18,7 +18,7 @@
             <p style="text-align: center;">카카오톡에 입력된 내 이름을 입력해주세요</p>
         </div>
         <form style="text-align: center;" action="{{ url_for('submit_myname') }}" method="get">
-            <input type="text" id="myname" name="myname" required>
+            <input type="text" id="myname" name="myname" required autofocus>
             <button type="submit">제출</button>
         </form>
         <!-- <img src="{{ url_for('static',filename='image/CherryBlossom.png')}}" alt=""> -->
