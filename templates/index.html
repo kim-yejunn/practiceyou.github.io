@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .center-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .center-button button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <title>너랑 연습</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 style="text-align: center;">고수 월드</h1>
-    
-    <div class="center-button">
-        <button onclick="window.location.href='/myname'">고수</button>
+    <div class="imgs">
+        <img src="{{ url_for('static',filename='image/main_logo.png')}}" alt="" id="logo">
+        <img src="{{ url_for('static',filename='image/C_N_Y.png')}}" alt="" id="CNY">
+    </div>
+
+    <div class="buttons">
+        <a href="/myname">
+            <div class="center-button" link="/myname">
+                <img src="{{ url_for('static',filename='image/practice_logo.png')}}" alt="" id= "practice_logo">
+                연습하러 가기
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="center-button">
+                <img src="{{ url_for('static',filename='image/Github_logo.png')}}" alt="" >
+                깃허브 바로가기
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="center-button">
+                <img src="{{ url_for('static',filename='image/notion_logo.png')}}" alt="" >
+                노션 바로가기
+            </div>
+        </a>
     </div>
 </body>
 </html>
