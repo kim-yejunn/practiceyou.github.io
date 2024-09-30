@@ -12,13 +12,15 @@
 
 </head>
 <body>
+    <img src="{{ url_for('static',filename='image/main_logo.png')}}" alt="" id="logo">
+
     <div class="container">
         <div class="your_name"> 
             <h1 style="text-align: center;">상대의 이름을 입력하세요.</h1>
             <p style="text-align: center;">카카오톡에 입력된 상대 이름을 입력해주세요</p>
         </div>
         <form style="text-align: center;" action="/yourname/submit" method="get">
-            <input type="text" id="name" name="name" required autofocus>
+            <input type="text" id="name" name="name" required autoc>
             <button type="submit">제출</button>
         </form>
         <!-- <img src="{{ url_for('static',filename='image/CherryBlossom.png')}}" alt=""> -->
