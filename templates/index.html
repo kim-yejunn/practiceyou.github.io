@@ -16,22 +16,26 @@
     </div>
 
     <div class="buttons">
+        <a href="/myname">
+            <div class="center-button" link="/myname">
+                <img src="{{ url_for('static',filename='image/practice_logo.png')}}" alt="" id= "practice_logo">
+                연습하러 가기
+            </div>
+        </a>
 
-        <div class="center-button" link="/myname">
-            <img src="{{ url_for('static',filename='image/notion_logo.png')}}" alt="" >
-            연습하러 가기
-        </div>
+        <a href="#">
+            <div class="center-button">
+                <img src="{{ url_for('static',filename='image/Github_logo.png')}}" alt="" >
+                깃허브 바로가기
+            </div>
+        </a>
 
-        <div class="center-button">
-            <img src="{{ url_for('static',filename='image/Github_logo.png')}}" alt="" >
-            깃허브 바로가기
-        </div>
-
-        <div class="center-button">
-            <img src="{{ url_for('static',filename='image/notion_logo.png')}}" alt="" >
-            노션 바로가기
-        </div>
-        
+        <a href="#">
+            <div class="center-button">
+                <img src="{{ url_for('static',filename='image/notion_logo.png')}}" alt="" >
+                노션 바로가기
+            </div>
+        </a>
     </div>
 </body>
 </html>
