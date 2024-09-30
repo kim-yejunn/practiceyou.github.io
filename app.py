@@ -47,10 +47,10 @@ def extraction():
     
     filepathtosave = os.path.join(Upload_Folder, 'merge.txt')
     
-    with open(filepathtosave, 'w') as f:
+    with open(filepathtosave, 'w', encoding='utf-8') as f:
         for filename in filenames:
             filepath = os.path.join(Upload_Folder, filename)
-            with open(filepath, 'r') as file:
+            with open(filepath, 'r', encoding='utf-8') as file:
                 data = file.read()
                 f.write(data)
         
