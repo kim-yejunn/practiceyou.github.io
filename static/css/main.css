@@ -57,14 +57,19 @@ body{
     text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
     transition:0.4s;
 }
+
+#nextbutton{
+    background-color: #1C5992;
+}
+
 .buttons .center-button:hover{
     text-shadow: -1px 0px rgb(185, 185, 185), 0px 1px rgb(185, 185, 185), 1px 0px rgb(185, 185, 185), 0px -1px rgb(185, 185, 185);
     transition:0.4s;
 }
-.buttons .center-button:first-child{
+.buttons:first-child{
     background-color:#1C5992;
 }
-.buttons .center-button:first-child:hover{
+#nextbutton:first-child:hover{
     background-color:#194e7f;
 
 }
