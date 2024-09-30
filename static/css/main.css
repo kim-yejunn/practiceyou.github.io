@@ -1,0 +1,48 @@
+html{
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    justify-content: center;
+    font-family: "Jua", system-ui;
+
+}
+
+body{
+    /* background: #FFDFDE; */
+    width:400px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo{
+    width:400px;
+    margin-top:40px;
+}
+#CNY{
+    width: 400px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap:5px;
+    width:350px;
+
+}
+.buttons .center-button{
+    width:250px;;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    font-size:18px;
+}
+.center-button img{
+    width:70px;
+    height: 40px;
+}
