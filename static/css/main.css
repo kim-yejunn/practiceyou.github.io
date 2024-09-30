@@ -28,7 +28,7 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    gap:5px;
+    gap:10px;
     width:350px;
 
 }
@@ -40,7 +40,9 @@ body{
     padding:10px;
     background-color: #EEEEEE;
     border-radius: 20px;
-    font-size:18px;
+    font-size:20px;
+    cursor:pointer;
+
 }
 .center-button img{
     width:70px;
