@@ -74,20 +74,17 @@ def check_name(filepathtosave, name, myname):
     myname_exists = myname in content
 
     if name_exists and myname_exists:
-        print(f"'{name}'와 '{myname}' 둘 다 파일에 존재합니다.")
+        flash(f"'{name}'와 '{myname}' 둘 다 파일에 존재합니다.")
         return True
     elif name_exists:
         flash(f"'{name}'는 파일에 있지만 '{myname}'는 없습니다.")
-        print(f"'{name}'는 파일에 있지만 '{myname}'는 없습니다.")
-        return render_template("submit.html")
+        return False
     elif myname_exists:
         flash(f"'{myname}'는 파일에 있지만 '{name}'는 없습니다.")
-        print(f"'{myname}'는 파일에 있지만 '{name}'는 없습니다.")
-        return render_template("submit.html")
+        return False
     else:
         flash(f"'{name}'와 '{myname}' 둘 다 파일에 없습니다.")
-        print(f"'{name}'와 '{myname}' 둘 다 파일에 없습니다.")
-        return render_template("submit.html")
+        return False
 
 def detect_platform(lines):
     # 아이폰용: 첫 번째 줄이 'Talk' 형식인지 확인
@@ -268,7 +265,10 @@ def create_app():
             
             merge_file_path = extraction()
             
-            check_name(merge_file_path, name, myname)
+            # check_name 함수 결과에 따라 처리
+            if not check_name(merge_file_path, name, myname):
+                # 이름 확인 실패 시 submit.html로 렌더링
+                return render_template('submit.html', name=name)
             
             print(f"Merged file 경로: {merge_file_path}")
 
