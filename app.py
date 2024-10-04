@@ -1,5 +1,5 @@
 import os, tiktoken, json, re
-from flask import Flask, render_template, request, Blueprint, redirect, url_for, session
+from flask import Flask, render_template, request, Blueprint, redirect, url_for, session, flash
 from dotenv import load_dotenv
 from openai import OpenAI
 load_dotenv()
@@ -55,6 +55,39 @@ def extraction():
                 f.write(data)
         
     return filepathtosave  
+
+# 파일 내에 이름 확인
+def check_name(filepathtosave, name, myname):
+    if not os.path.exists(filepathtosave):
+            print(f"파일이 존재하지 않습니다: {filepathtosave}")
+            return False
+
+    try:
+        with open(filepathtosave, 'r', encoding='utf-8') as f:
+            content = f.read()  # 파일 전체 내용 읽기
+    except Exception as e:
+        print(f"파일 읽기 실패: {e}")
+        return False
+
+    # 내 이름과 상대방 이름이 모두 파일에 포함되어 있는지 확인
+    name_exists = name in content
+    myname_exists = myname in content
+
+    if name_exists and myname_exists:
+        print(f"'{name}'와 '{myname}' 둘 다 파일에 존재합니다.")
+        return True
+    elif name_exists:
+        flash(f"'{name}'는 파일에 있지만 '{myname}'는 없습니다.")
+        print(f"'{name}'는 파일에 있지만 '{myname}'는 없습니다.")
+        return render_template("submit.html")
+    elif myname_exists:
+        flash(f"'{myname}'는 파일에 있지만 '{name}'는 없습니다.")
+        print(f"'{myname}'는 파일에 있지만 '{name}'는 없습니다.")
+        return render_template("submit.html")
+    else:
+        flash(f"'{name}'와 '{myname}' 둘 다 파일에 없습니다.")
+        print(f"'{name}'와 '{myname}' 둘 다 파일에 없습니다.")
+        return render_template("submit.html")
 
 def detect_platform(lines):
     # 아이폰용: 첫 번째 줄이 'Talk' 형식인지 확인
@@ -215,6 +248,7 @@ def create_app():
     @bp.route('/', methods=['GET', 'POST'])
     def upload_file():
         name = session.get('name')
+        myname = session.get('myname')
         print("upload_file 실행 성공")
         
         if os.path.exists(Upload_Folder):
@@ -233,6 +267,9 @@ def create_app():
                 print(f"File 저장: {filename}")
             
             merge_file_path = extraction()
+            
+            check_name(merge_file_path, name, myname)
+            
             print(f"Merged file 경로: {merge_file_path}")
 
             filter_chat(merge_file_path, name)
