@@ -1,4 +1,3 @@
 
-app.py
-app.py
-*.py
+*.txt
+.env
