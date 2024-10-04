@@ -1,0 +1,184 @@
+html{
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    justify-content: center;
+}
+
+
+body{
+    /* background: #FFDFDE; */
+width:400px;
+display:flex;
+flex-direction: column;
+margin:0;
+}
+
+
+.chat-container{
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+
+
+
+
+
+
+/* 채팅창 상단 이름 표기 부분 */
+.chat-container .gpt-profile{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: #a1b4e0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.chat-container .gpt-profile span{
+    margin-left:15px;
+    font-family: 'jua', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*채팅창 하단 입력 부분*/
+
+.chat-container .chat-input-box{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #a1b4e0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.chat-input-box form{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.chat-container .chat-input-box button{
+    width: 70px;
+    background-color: #DDDDDD;
+    border:0;
+    border-radius: 100px;
+    height: 31px;
+    cursor: pointer;
+    transition: all 0.3s;    
+    font-family: "Jua", system-ui;
+}
+.chat-container .chat-input-box button:hover{
+    background-color: #EEEEEE;
+
+}
+
+.chat-container .chat-input-box input{
+    margin-left:10px;
+    border-radius: 100px;
+    padding:3px;
+    padding-left: 20px;
+    padding-right:20px;
+    border:none;
+    background-color: #DDDDDD;
+    width:260px;
+    height:25px;
+    color:#6A7BA2;
+}
+.chat-container .chat-input-box input:focus{
+    outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*채팅 내역 부분*/
+
+
+.chat-container #chat-box{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    padding:10px;
+    height: calc( 100% - 110px);
+    overflow-y: auto;
+    background-color: #fffafa;
+    font-family: 'Namum Gothic', sans-serif;    /*수정 필요*/
+}
+
+
+
+.chat-container #chat-box div{
+    font-size: 14px;
+    display: flex;
+    padding: 5px;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 15px;
+    max-width: 300px;
+
+}
+
+/*내 채팅*/
+.chat-container #chat-box .user-message{
+    align-self: flex-end;
+    background-color: #BCE3FF;
+    ;
+}
+
+
+.chat-container #chat-box .gpt-msg{
+    padding-left: 0 ;
+  
+}
+.chat-container #chat-box .gpt-message{
+    background-color: #e9e9e9;
+    max-width:  270px;
+}
+
+.chat-container #chat-box .gpt-name{
+    margin-left: 0;
+    padding-left:0;
+    BACKGROUND-COLOR: #A8A8A8;
+    border-radius: 100%;
+}
+
+
+
+
+/* "입력 중..." 말풍선 애니메이션 */
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.typing-indicator {
+    animation: fadeInOut 3s ease-in-out;
+}
