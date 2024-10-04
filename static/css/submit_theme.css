@@ -15,3 +15,75 @@ body{
     margin-top:40px;
 }
 
+
+
+.main_form .head_title{
+    text-align: center;
+    font-family: "Jua", system-ui;
+    color:#6A7BA2;
+
+}
+.main_form .head_title h1{
+    font-weight:400;
+    font-size: 35px;
+}
+
+
+.foot_form{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foot_form form{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot_form form input{
+    display:none;
+}
+
+
+.foot_form form .preview{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foot_form form .preview label {
+    width: 90%;
+    min-height: 15px;
+    padding: 5px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Jua", system-ui;
+    display: block;
+    white-space: pre-wrap; /* 줄바꿈 처리를 위해 추가 */
+    word-wrap: break-word; /* 긴 단어가 있을 경우 줄바꿈 처리 */
+}
+
+.foot_form form .buttons{
+    display:flex;
+    justify-content: space-between;
+    margin-top:10px;
+    width:70%;
+}
+
+.foot_form form .buttons button{
+    width: 70px;
+    height: 30px;
+    border-radius: 100px;
+    border:none;
+    background-color: #DDDDDD;
+    color:#6A7BA2;
+    font-family: "Jua", system-ui;
+    cursor: pointer;
+    
+}
