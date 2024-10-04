@@ -37,7 +37,17 @@
 
     <script src="{{ url_for('static', filename='js/submit.js') }}"></script>
 
-
+    <!-- Flash 메시지를 팝업으로 띄우기 위한 JavaScript -->
+    <script>
+        // Flash 메시지가 있다면 팝업 창으로 띄우기
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    alert("{{ message|safe }}");
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
 </body>
 
 </html>
