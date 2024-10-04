@@ -58,6 +58,10 @@ def extraction():
     return filepathtosave  
 
 def detect_platform(lines):
+    # 아이폰용: 첫 번째 줄이 'Talk' 형식인지 확인
+    if len(lines[0].split(',')) == 1 and 'Talk' in lines[0]:
+        return 'iphone'
+    
     # 맥용: 첫 번째 줄이 'Date,User,Message' 형식인지 확인
     if len(lines[0].split(',')) == 3 and 'Date' in lines[0] and 'User' in lines[0] and 'Message' in lines[0]:
         return 'mac'
@@ -105,6 +109,18 @@ def filter_chat(filepathtosave, name):
                 message = message.strip('"')
                 if message:
                     filtered_chat.append(f"{user}: {message}")
+                    
+    elif platform == 'iphone':
+        # 대화에서 날짜, 시간, 기타 불필요한 정보 제거
+        conversation_pattern = re.compile(r'[\d]{4}\. [\d]{1,2}\. [\d]{1,2}\. (?:오전|오후) [\d]{1,2}:[\d]{2}, (.+?) : (.+)')
+        
+        for line in lines:
+            match = conversation_pattern.match(line.strip())
+            if match:
+                # 이름과 대화 내용만 추출하여 저장
+                user_name = match.group(1)
+                message = match.group(2)
+                filtered_chat.append(f"{user_name} : {message}")
 
     elif platform == 'windows':
         time_pattern = re.compile(r'\[오[전후] \d{1,2}:\d{2}\]')
