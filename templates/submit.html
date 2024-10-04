@@ -11,8 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 <body>
-    <img src="{{ url_for('static',filename='image/main_logo.png')}}" alt="" id="logo">
-
+    <a href="http://localhost:9005">
+        <img src="{{ url_for('static',filename='image/main_logo.png')}}" alt="" id="logo" >
+    </a>
     <div class="main_form">
         <div class="head_title">
             <h1>대화 내용을 업로드해주세요.</h1>
@@ -37,16 +38,7 @@
     <script src="{{ url_for('static', filename='js/submit.js') }}"></script>
 
     <!-- Flash 메시지를 팝업으로 띄우기 위한 JavaScript -->
-    <script>
-        // Flash 메시지가 있다면 팝업 창으로 띄우기
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    alert("{{ message }}");
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </script>
+   
 </body>
 
 </html>
