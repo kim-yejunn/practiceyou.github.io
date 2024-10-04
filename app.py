@@ -2,7 +2,6 @@ import os, tiktoken, json, re
 from flask import Flask, render_template, request, Blueprint, redirect, url_for, session
 from dotenv import load_dotenv
 from openai import OpenAI
-
 load_dotenv()
 
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
