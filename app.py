@@ -2,10 +2,19 @@ import os, tiktoken, json, re
 from flask import Flask, render_template, request, Blueprint, redirect, url_for, session, flash, jsonify, get_flashed_messages
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime
 load_dotenv()
 
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
 client = OpenAI(api_key=os.getenv('api_key'))
+
+# 사용자별 폴더 생성
+def create_user_folder(name, myname):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+    folder_name = f"{timestamp}_{name}_{myname}"
+    user_folder = os.path.join(Upload_Folder, folder_name)
+    os.makedirs(user_folder, exist_ok=True)
+    return user_folder
 
 # 토큰 마지막 내용 19000개로 제한
 def limit_tokens_from_recent(filterfile, max_tokens=19000):
@@ -41,15 +50,15 @@ def load_chat_history(name):
     return []
 
 # 업로드 된 파일 merge로 통합하기
-def extraction():
-    filenames = os.listdir(Upload_Folder)
+def extraction(user_folder):
+    filenames = os.listdir(user_folder)
     print(f"폴더 내 업로드 된 파일 이름: {filenames}")
     
-    filepathtosave = os.path.join(Upload_Folder, 'merge.txt')
+    filepathtosave = os.path.join(user_folder, 'merge.txt')
     
     with open(filepathtosave, 'w', encoding='utf-8') as f:
         for filename in filenames:
-            filepath = os.path.join(Upload_Folder, filename)
+            filepath = os.path.join(user_folder, filename)
             with open(filepath, 'r', encoding='utf-8') as file:
                 data = file.read()
                 f.write(data)
@@ -104,7 +113,7 @@ def detect_platform(lines):
     return 'unknown'
 
 # 채팅 필터링 함수
-def filter_chat(filepathtosave, name):
+def filter_chat(filepathtosave, name, user_folder):
     if not os.path.exists(filepathtosave):
         print(f"파일 존재 안 함: {filepathtosave}")
         return
@@ -168,7 +177,7 @@ def filter_chat(filepathtosave, name):
         print("채팅 내용을 찾을 수 없습니다.")
         return
     
-    filterfile = os.path.join(os.path.dirname(filepathtosave), 'filtered_chat.txt')
+    filterfile = os.path.join(user_folder, 'filtered_chat.txt')
     try:
         with open(filterfile, 'w', encoding='utf-8') as file:
             file.write("\n".join(filtered_chat))
@@ -241,38 +250,37 @@ def create_app():
         myname = session.get('myname')
         print("upload_file 실행 성공")
         
-        if os.path.exists(Upload_Folder):
-            for file in os.scandir(Upload_Folder):
-                os.remove(file.path)
-            print("Upload folder 내 파일 삭제")
-        
         if request.method == 'POST':
             print("POST 받음")
+            
+            user_folder = create_user_folder(name, myname)
+            session['user_folder'] = user_folder
             
             files = request.files.getlist('savefile')
             for file in files:
                 filename = file.filename
-                filepathtosave = os.path.join(Upload_Folder, filename)
+                filepathtosave = os.path.join(user_folder, filename)
                 file.save(filepathtosave)
                 print(f"File 저장: {filename}")
             
-            merge_file_path = extraction()
+            merge_file_path = extraction(user_folder)
                 
             # check_name 함수 결과에 따라 처리
             check_result, message = check_name(merge_file_path, name, myname)
             if not check_result:
-                # 이름 확인 안 될 시 파일 삭제
-                if os.path.exists(Upload_Folder):
-                    for file in os.scandir(Upload_Folder):
+                # 이름 확인 안 될 시 폴더 삭제
+                if os.path.exists(user_folder):
+                    for file in os.scandir(user_folder):
                         os.remove(file.path)
-                    print("Upload folder 내 파일 삭제")
+                    os.rmdir(user_folder)
+                    print("사용자 폴더 삭제")
                 
                 # 이름 확인 실패 시 메시지와 함께 JSON 응답 반환
                 return jsonify({'success': False, 'message': message})
             
             print(f"Merged file 경로: {merge_file_path}")
 
-            filter_chat(merge_file_path, name)
+            filter_chat(merge_file_path, name, user_folder)
             
             return jsonify({'success': True, 'message': '파일 업로드 성공'})
 
@@ -311,9 +319,10 @@ def create_app():
     @app.route('/send_message', methods=['POST'])
     def send_message():
         user_message = request.get_json()['message']
+        user_folder = session.get('user_folder')
 
-        merge_file_path = os.path.join(Upload_Folder, 'merge.txt')
-        filter_file = filter_chat(merge_file_path, session['name'])
+        merge_file_path = os.path.join(user_folder, 'merge.txt')
+        filter_file = filter_chat(merge_file_path, session['name'], user_folder)
 
         if filter_file:
             reply = gpt_response(filter_file, session['name'], user_message)
