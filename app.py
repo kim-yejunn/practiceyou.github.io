@@ -1,5 +1,5 @@
 import os, tiktoken, json, re
-from flask import Flask, render_template, request, Blueprint, redirect, url_for, session, flash
+from flask import Flask, render_template, request, Blueprint, redirect, url_for, session, flash, jsonify, get_flashed_messages
 from dotenv import load_dotenv
 from openai import OpenAI
 load_dotenv()
@@ -59,32 +59,25 @@ def extraction():
 # 파일 내에 이름 확인
 def check_name(filepathtosave, name, myname):
     if not os.path.exists(filepathtosave):
-            print(f"파일이 존재하지 않습니다: {filepathtosave}")
-            return False
+        return False, f"파일이 존재하지 않습니다: {filepathtosave}"
 
     try:
         with open(filepathtosave, 'r', encoding='utf-8') as f:
-            content = f.read()  # 파일 전체 내용 읽기
+            content = f.read()
     except Exception as e:
-        print(f"파일 읽기 실패: {e}")
-        return False
+        return False, f"파일 읽기 실패: {e}"
 
-    # 내 이름과 상대방 이름이 모두 파일에 포함되어 있는지 확인
     name_exists = name in content
     myname_exists = myname in content
 
     if name_exists and myname_exists:
-        flash(f"'{name}'와 '{myname}' 둘 다 파일에 존재합니다.")
-        return True
+        return True, f"'{name}'와 '{myname}' 둘 다 파일에 존재합니다."
     elif name_exists:
-        flash(f"'{name}'는 파일에 있지만 '{myname}'는 없습니다.")
-        return False
+        return False, f"'{name}'는 파일에 있지만 '{myname}'는 없습니다."
     elif myname_exists:
-        flash(f"'{myname}'는 파일에 있지만 '{name}'는 없습니다.")
-        return False
+        return False, f"'{myname}'는 파일에 있지만 '{name}'는 없습니다."
     else:
-        flash(f"'{name}'와 '{myname}' 둘 다 파일에 없습니다.")
-        return False
+        return False, f"'{name}'와 '{myname}' 둘 다 파일에 없습니다."
 
 def detect_platform(lines):
     # 아이폰용: 첫 번째 줄이 'Talk' 형식인지 확인
@@ -264,17 +257,24 @@ def create_app():
                 print(f"File 저장: {filename}")
             
             merge_file_path = extraction()
-            
+                
             # check_name 함수 결과에 따라 처리
-            if not check_name(merge_file_path, name, myname):
-                # 이름 확인 실패 시 submit.html로 렌더링
-                return render_template('submit.html', name=name)
+            check_result, message = check_name(merge_file_path, name, myname)
+            if not check_result:
+                # 이름 확인 안 될 시 파일 삭제
+                if os.path.exists(Upload_Folder):
+                    for file in os.scandir(Upload_Folder):
+                        os.remove(file.path)
+                    print("Upload folder 내 파일 삭제")
+                
+                # 이름 확인 실패 시 메시지와 함께 JSON 응답 반환
+                return jsonify({'success': False, 'message': message})
             
             print(f"Merged file 경로: {merge_file_path}")
 
             filter_chat(merge_file_path, name)
             
-            return redirect(url_for('fileupload.result'))
+            return jsonify({'success': True, 'message': '파일 업로드 성공'})
 
         return render_template('submit.html', name=name)
 
