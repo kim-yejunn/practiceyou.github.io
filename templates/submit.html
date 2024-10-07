@@ -36,18 +36,13 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/submit.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash_messages.js') }}"></script>
 
-    <!-- Flash 메시지를 팝업으로 띄우기 위한 JavaScript -->
-    <script>
-        // Flash 메시지가 있다면 팝업 창으로 띄우기
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    alert("{{ message|safe }}");
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <!-- Flash 메시지를 JavaScript로 전달하기 위한 hidden 요소 -->
+    <script id="flash-messages" type="application/json">
+        {{ get_flashed_messages() | tojson | safe }}
     </script>
-</body>
 
+</body>
 </html>
