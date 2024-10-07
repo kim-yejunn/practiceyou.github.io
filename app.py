@@ -267,6 +267,8 @@ def create_app():
             
             # check_name 함수 결과에 따라 처리
             if not check_name(merge_file_path, name, myname):
+                for file in os.scandir(Upload_Folder):
+                    os.remove(file.path)
                 # 이름 확인 실패 시 submit.html로 렌더링
                 return render_template('submit.html', name=name)
             
