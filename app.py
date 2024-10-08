@@ -36,13 +36,13 @@ def limit_tokens_from_recent(filterfile, max_tokens=19000):
     return filterfile
 
 # 채팅 내용 저장 및 불러오기
-def save_chat_history(chat_history, name):
-    chat_file = os.path.join(Upload_Folder, f'{name}_chat_history.json')
+def save_chat_history(chat_history, user_folder, name):
+    chat_file = os.path.join(user_folder, f'{name}_chat_history.json')
     with open(chat_file, 'w', encoding='utf-8') as f:
         json.dump(chat_history, f)
 
-def load_chat_history(name):
-    chat_file = os.path.join(Upload_Folder, f'{name}_chat_history.json')
+def load_chat_history(user_folder, name):
+    chat_file = os.path.join(user_folder, f'{name}_chat_history.json')
     if os.path.exists(chat_file):
         with open(chat_file, 'r', encoding='utf-8') as f:
             chat_history = json.load(f)
@@ -192,7 +192,8 @@ def filter_chat(filepathtosave, name, user_folder):
 
 # gpt 응답
 def gpt_response(filterfile, name, user_message=None):
-    chat_history = load_chat_history(name)
+    user_folder = session.get('user_folder')
+    chat_history = load_chat_history(user_folder, name)
     myname = session.get('myname')
     print(f"내 이름: {myname}") 
 
@@ -228,7 +229,7 @@ def gpt_response(filterfile, name, user_message=None):
             "content": gpt_reply
         })
         
-        save_chat_history(chat_history, name)
+        save_chat_history(chat_history, user_folder, name)
 
         return gpt_reply
     except Exception as e:
