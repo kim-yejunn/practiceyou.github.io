@@ -11,58 +11,6 @@ function setViewportHeight() {
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
-const windowInnerHeight = window.innerHeight;
-const viewportHeight = parseInt(visualViewport.height);
-let isKeyboard = false;
-
-// ✔️ IOS 키보드 On & Off
-if(windowInnerHeight > viewportHeight){ 
-  // 키보드 ON
-  isKeyboard = true;
-}else{
-  // 키보드 OFF
-  isKeyboard = false;
-}
-// IOS 키패드 전체 화면 높이보다 viewport 높이가 작을 때
-if(windowInnerHeight > viewportHeight){
-    isKeyboard = true;
-    // 👇 높이 지정
-    viewportwrap.style.height = `${viewportHeight}px`; 
-  }else{
-    isKeyboard = false;
-    viewportwrap.style.height = "100%"; // or auto
-  }// EX) 키보드 ON - scroll 이벤트 
-if(windowInnerHeight > viewportHeight){ // 키보드 ON
-    isKeyboard = true;
-    viewportwrap.style.height = `${viewportHeight}px`;
-    window.addEventListener('scroll',handleWindowScroll);
-    visualViewport.addEventListener("scroll", handleViewportScroll);
-  }else{  // 키보드 OFF - scroll 이벤트 해제
-    isKeyboard = false;
-    viewportwrap.style.height = "100%";
-    window.removeEventListener('scroll',handleWindowScroll);
-    visualViewport.removeEventListener("scroll", handleViewportScroll);
-  }
-  
-  // scroll event
-  function handleWindowScroll(){
-    let viewportTopGap = parseInt(visualViewport.pageTop - visualViewport.offsetTop);
-    let translateY = parseInt(window.scrollY - viewportTopGap);
-    // 👇 scroll 변화에 따라 viewport div 이동
-    viewportwrap.style.transform = `translateY(${translateY}px)`;
-  }
-  // viewport scroll 
-  function handleViewportScroll (e){ 
-    // viewport scroll
-    const viewportScrollY = parseInt(e.target.offsetTop);
-    // IOS에서는 사용하지 않고 확인용으로만 👀
-    // viewport scroll 값을 계산한다면 사용할 수 있습니다.
-  }// 가상 영역까지 스크롤 내려가는 것을 방지
-if(window.scrollY + visualViewport.height > document.body.offsetHeight - 2){ 
-    window.scrollTo(0, document.body.offsetHeight - visualViewport.height-1);
-}
-
-
 
 // form.addEventListener('submit', function (e) {
 //     e.preventDefault();
