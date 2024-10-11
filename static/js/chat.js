@@ -1,18 +1,13 @@
-const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
 const userMessage = document.getElementById('user-message');
-
 
 function setViewportHeight() {
     // 뷰포트 높이를 계산하여 CSS 변수로 설정
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-}setViewportHeight();
-
-
-
+}
+setViewportHeight();
 
 // 이벤트 리스너 추가
-
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
@@ -27,11 +22,12 @@ function adjustChatBoxHeight() {
 // 초기 높이 설정
 adjustChatBoxHeight();
 
-// 이벤트 리스너 추가
-window.addEventListener('resize', adjustChatBoxHeight);
-window.visualViewport.addEventListener('resize', adjustChatBoxHeight);
+// input에 focus 이벤트 리스너 추가
 userMessage.addEventListener('focus', adjustChatBoxHeight);
 userMessage.addEventListener('blur', adjustChatBoxHeight);
+
+
+
 
 
 
