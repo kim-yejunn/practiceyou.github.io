@@ -1,8 +1,6 @@
 const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
-
-
-
+const userMessage = document.getElementById('user-message');
 
 
 function setViewportHeight() {
@@ -14,31 +12,23 @@ window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
 
-function adjustChatBoxHeight() {
-    const chatBox = document.getElementById('chat-box');
-    const inputBoxHeight = document.querySelector('.chat-input-box').offsetHeight;
-    const profileHeight = document.querySelector('.gpt-profile').offsetHeight;
-    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-    if (window.visualViewport && window.visualViewport.height < window.innerHeight) {
-        // 키보드가 올라온 경우
-        chatBox.style.height = `${viewportHeight - profileHeight - inputBoxHeight}px`;
-    } else {
-        // 키보드가 내려간 경우
-        chatBox.style.height = `calc(100vh - ${profileHeight + inputBoxHeight}px)`;
-    }
+
+
+
+function adjustChatBoxHeight() {
+    const viewportHeight = window.innerHeight;
+    chatBox.style.height = `${viewportHeight - form.offsetHeight}px`;
 }
 
-// 초기 호출
+// 초기 높이 설정
 adjustChatBoxHeight();
 
 // 이벤트 리스너 추가
 window.addEventListener('resize', adjustChatBoxHeight);
-window.addEventListener('orientationchange', adjustChatBoxHeight);
-
-const userMessage = document.getElementById('user-message');
 userMessage.addEventListener('focus', adjustChatBoxHeight);
 userMessage.addEventListener('blur', adjustChatBoxHeight);
+
 
 
 
