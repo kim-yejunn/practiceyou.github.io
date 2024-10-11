@@ -283,7 +283,7 @@ def create_app():
 
             filter_chat(merge_file_path, name, user_folder)
             
-            return jsonify({'success': True, 'message': '파일 업로드 성공'})
+            return jsonify({'success': True})
 
         return render_template('submit.html', name=name)
 
