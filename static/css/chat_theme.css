@@ -219,7 +219,7 @@ margin:0;
         box-shadow: none;;
         width:100%;
         padding:0;
-        position:relative;
+        position:absolute;
         height: calc(var(--vh, 1vh) * 100 - 90px);
         overflow-y: auto;
         }
@@ -242,7 +242,7 @@ margin:0;
         align-items: center;
         height: 50px;
         background-color: #a1b4e0;
-        position:absolute;
+        position:fixed;
         bottom:0;
         width:100%;
         border-radius: 0;
