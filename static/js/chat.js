@@ -2,12 +2,6 @@ const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
 const userMessage = document.getElementById('user-message');
 
-
-//화면 비율 관련
-const windowInnerHeight = window.innerHeight;
-const viewportHeight = parseInt(visualViewport.height);
-let isKeyboard = false;
-
 // form.addEventListener('submit', function (e) {
 //     e.preventDefault();
     
@@ -118,35 +112,40 @@ form.addEventListener('submit', function (e) {
 });
 
 
+// 키보드가 올라오면 키보드 부분을 제외한 부분만 페이지의 높이로 사용
+function adjustViewportHeight() {
+    const viewportHeight = visualViewport.height;
+    const viewportOffsetTop = visualViewport.offsetTop;
+    const availableHeight = viewportHeight - viewportOffsetTop;
 
-// EX) 키보드 ON - scroll 이벤트 
-if(windowInnerHeight > viewportHeight){ // 키보드 ON
-    isKeyboard = true;
-    viewportwrap.style.height = `${viewportHeight}px`;
-    window.addEventListener('scroll',handleWindowScroll);
-    visualViewport.addEventListener("scroll", handleViewportScroll);
-  }else{  // 키보드 OFF - scroll 이벤트 해제
-    isKeyboard = false;
-    viewportwrap.style.height = "100%";
-    window.removeEventListener('scroll',handleWindowScroll);
-    visualViewport.removeEventListener("scroll", handleViewportScroll);
-  }
-  
-  // scroll event
-  function handleWindowScroll(){
+    document.body.style.height = `${availableHeight}px`;
+}
+
+// scroll event
+function handleWindowScroll() {
     let viewportTopGap = parseInt(visualViewport.pageTop - visualViewport.offsetTop);
     let translateY = parseInt(window.scrollY - viewportTopGap);
     // 👇 scroll 변화에 따라 viewport div 이동
     viewportwrap.style.transform = `translateY(${translateY}px)`;
-  }
-  // viewport scroll 
-  function handleViewportScroll (e){ 
+}
+
+// viewport scroll 
+function handleViewportScroll(e) { 
     // viewport scroll
     const viewportScrollY = parseInt(e.target.offsetTop);
     // IOS에서는 사용하지 않고 확인용으로만 👀
     // viewport scroll 값을 계산한다면 사용할 수 있습니다.
-  }
-// 가상 영역까지 스크롤 내려가는 것을 방지
-if(window.scrollY + visualViewport.height > document.body.offsetHeight - 2){ 
-    window.scrollTo(0, document.body.offsetHeight - visualViewport.height-1);
 }
+
+// 가상 영역까지 스크롤 내려가는 것을 방지
+if (window.scrollY + visualViewport.height > document.body.offsetHeight - 2) { 
+    window.scrollTo(0, document.body.offsetHeight - visualViewport.height - 1);
+}
+
+// 이벤트 리스너 추가
+visualViewport.addEventListener('resize', adjustViewportHeight);
+window.addEventListener('scroll', handleWindowScroll);
+visualViewport.addEventListener('scroll', handleViewportScroll);
+
+// 초기 호출
+adjustViewportHeight();
