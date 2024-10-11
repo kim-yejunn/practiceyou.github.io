@@ -34,6 +34,8 @@ margin:0;
     background-color: #a1b4e0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    position:fixed;
+    width:400px;
 }
 .chat-container .gpt-profile span{
     margin-left:15px;
@@ -69,6 +71,9 @@ margin:0;
     background-color: #a1b4e0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    position:fixed;
+    bottom:0;
+    width:400px;
 }
 
 .chat-input-box form{
@@ -122,6 +127,8 @@ margin:0;
 
 
 .chat-container #chat-box{
+    top:40px;
+    position:absolute;
     display: flex;
     flex-direction: column;
     align-self:center;
