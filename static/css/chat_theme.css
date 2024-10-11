@@ -197,3 +197,36 @@ margin:0;
 .typing-indicator {
     animation: fadeInOut 3s ease-in-out;
 }
+
+
+
+@media screen and (max-width: 500px) {
+    .chat-container .gpt-profile{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        background-color: #a1b4e0;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        position:fixed;
+        width:max-content;
+
+    }
+
+    .chat-container{
+        height: auto;
+        border:none;
+    }
+    
+    .chat-input-box{
+        display: flex;
+        align-items: center;
+        height: 50px;
+        background-color: #a1b4e0;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        position:fixed;
+        bottom:0;
+        width:max-content;
+    }
+}
