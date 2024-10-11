@@ -12,32 +12,6 @@ window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
 
-    
-function setViewportHeight() {
-    // 뷰포트 높이를 계산하여 CSS 변수로 설정
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-}
-
-function adjustChatBoxHeight() {
-    const vh = window.innerHeight * 0.01;
-    chatBox.style.height = `calc(100vh - ${vh * 10}px)`;
-}
-
-setViewportHeight();
-adjustChatBoxHeight();
-
-// 이벤트 리스너 추가
-window.addEventListener('resize', () => {
-    setViewportHeight();
-    adjustChatBoxHeight();
-});
-window.addEventListener('orientationchange', () => {
-    setViewportHeight();
-    adjustChatBoxHeight();
-});
-
-userMessage.addEventListener('focus', adjustChatBoxHeight);
-userMessage.addEventListener('blur', adjustChatBoxHeight);
 
 
 
