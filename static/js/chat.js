@@ -1,6 +1,5 @@
 const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
-const userMessage = document.getElementById('user-message');
 
 
 function setViewportHeight() {
@@ -10,7 +9,27 @@ function setViewportHeight() {
 // 이벤트 리스너 추가
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
+function adjustChatBoxHeight() {
+    const chatBox = document.getElementById('chat-box');
+    const inputBoxHeight = document.querySelector('.chat-input-box').offsetHeight;
+    const profileHeight = document.querySelector('.gpt-profile').offsetHeight;
+    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
+    chatBox.style.top = `${profileHeight}px`;
+    chatBox.style.bottom = `${inputBoxHeight}px`;
+    chatBox.style.height = `${viewportHeight - profileHeight - inputBoxHeight}px`;
+}
+
+// 초기 호출
+adjustChatBoxHeight();
+
+// 이벤트 리스너 추가
+window.addEventListener('resize', adjustChatBoxHeight);
+window.addEventListener('orientationchange', adjustChatBoxHeight);
+
+const userMessage = document.getElementById('user-message');
+userMessage.addEventListener('focus', adjustChatBoxHeight);
+userMessage.addEventListener('blur', adjustChatBoxHeight);
 
 
 // form.addEventListener('submit', function (e) {
