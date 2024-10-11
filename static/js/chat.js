@@ -113,9 +113,17 @@ form.addEventListener('submit', function (e) {
 
 
 
+let initialViewportHeight = window.innerHeight;
+
 function adjustViewportHeight() {
-    const viewportHeight = window.innerHeight;
-    document.body.style.height = `${viewportHeight}px`;
+    const currentViewportHeight = window.innerHeight;
+    if (currentViewportHeight < initialViewportHeight) {
+        // 키보드가 올라온 경우
+        document.querySelector('.chat-container').style.height = `${currentViewportHeight}px`;
+    } else {
+        // 키보드가 내려간 경우
+        document.querySelector('.chat-container').style.height = 'calc(100% - 60px)';
+    }
 }
 
 // 이벤트 리스너 추가
