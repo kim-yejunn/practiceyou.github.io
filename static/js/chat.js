@@ -2,13 +2,17 @@ const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
 const userMessage = document.getElementById('user-message');
 
-userMessage.addEventListener('focus', () => {
-    adjustChatBoxHeight();
-});
+userMessage.addEventListener('focus', ()=>{
+    
+})
+userMessage.addEventListener('blur', ()=>{
 
-userMessage.addEventListener('blur', () => {
-    resetChatBoxHeight();
-});
+})
+
+
+
+
+
 
 function setViewportHeight() {
     // 뷰포트 높이를 계산하여 CSS 변수로 설정
@@ -19,28 +23,6 @@ setViewportHeight();
 // 이벤트 리스너 추가
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
-
-function adjustChatBoxHeight() {
-    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const profileHeight = document.querySelector('.gpt-profile').offsetHeight;
-    const inputBoxHeight = document.querySelector('.chat-input-box').offsetHeight;
-
-    chatBox.style.height = `${viewportHeight - profileHeight - inputBoxHeight}px`;
-}
-
-function resetChatBoxHeight() {
-    const profileHeight = document.querySelector('.gpt-profile').offsetHeight;
-    const inputBoxHeight = document.querySelector('.chat-input-box').offsetHeight;
-
-    chatBox.style.height = `calc(100vh - ${profileHeight + inputBoxHeight}px)`;
-}
-
-// 초기 높이 설정
-resetChatBoxHeight();
-
-
-
-
 
 
 // form.addEventListener('submit', function (e) {
