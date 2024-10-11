@@ -7,7 +7,7 @@ html{
 
 body{
     /* background: #FFDFDE; */
-width:100%;
+width: 400px;
 display:flex;
 flex-direction: column;
 margin:0;
@@ -73,7 +73,7 @@ margin:0;
     border-bottom-right-radius: 20px;
     position:fixed;
     bottom:0;
-    width:100%;
+    width:400px;
 }
 
 .chat-input-box form{
@@ -206,9 +206,7 @@ margin:0;
         align-items: center;
         height: 40px;
         background-color: #a1b4e0;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        position:absolute;
+        position:fixed;
         width:100%;
         border-radius: 0;
         top:0;
@@ -221,7 +219,7 @@ margin:0;
         box-shadow: none;;
         width:100%;
         padding:0;
-        position:absolute;
+        position:relative;
         height: calc(var(--vh, 1vh) * 100 - 90px);
         overflow-y: auto;
         }
