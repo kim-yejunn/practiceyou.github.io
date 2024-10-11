@@ -12,7 +12,7 @@ window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
 
-
+    
 function setViewportHeight() {
     // 뷰포트 높이를 계산하여 CSS 변수로 설정
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
