@@ -56,6 +56,7 @@ form.addEventListener('submit', function (e) {
         userDiv.className = 'user-message';
         userDiv.innerText = message;
         chatBox.appendChild(userDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
 
         // 서버에 메시지 전송
         fetch('/send_message', {
