@@ -2,6 +2,11 @@ const form = document.getElementById('chat-form');
 const chatBox = document.getElementById('chat-box');
 const userMessage = document.getElementById('user-message');
 
+
+function setMobileVh() {
+    let mobileVh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${mobileVh}px`);
+  }
 // form.addEventListener('submit', function (e) {
 //     e.preventDefault();
     
@@ -89,7 +94,7 @@ form.addEventListener('submit', function (e) {
                         // const gptProfileDiv = document.createElement('div');
                         // gptProfileDiv.className = 'gpt-name';
                         // gptProfileDiv.innerText = yourName; // Flask 변수 사용
-                        // gptMsgDiv.appendChild(gptProfileDiv);
+                        // gptMsgDiv.appendChil d(gptProfileDiv);
 
                         // GPT 메시지 추가
                         const gptDiv = document.createElement('div');
@@ -111,24 +116,3 @@ form.addEventListener('submit', function (e) {
     }
 });
 
-
-
-let initialViewportHeight = window.innerHeight;
-
-function adjustViewportHeight() {
-    const currentViewportHeight = window.innerHeight;
-    if (currentViewportHeight < initialViewportHeight) {
-        // 키보드가 올라온 경우
-        document.querySelector('.chat-container').style.height = `${currentViewportHeight}px`;
-    } else {
-        // 키보드가 내려간 경우
-        document.querySelector('.chat-container').style.height = 'calc(100% - 60px)';
-    }
-}
-
-// 이벤트 리스너 추가
-window.addEventListener('resize', adjustViewportHeight);
-window.addEventListener('orientationchange', adjustViewportHeight);
-
-// 초기 호출
-adjustViewportHeight();

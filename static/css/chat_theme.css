@@ -7,7 +7,7 @@ html{
 
 body{
     /* background: #FFDFDE; */
-width:400px;
+width:100%;
 display:flex;
 flex-direction: column;
 margin:0;
@@ -222,8 +222,7 @@ margin:0;
         width:100%;
         padding:0;
         position:absolute;
-        /* height :calc(100% - 90px); */
-        height: 100%;
+        height :calc(var(--vh)- 90px);
         overflow-y: auto;
         }
    
