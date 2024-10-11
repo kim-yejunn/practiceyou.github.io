@@ -222,7 +222,7 @@ margin:0;
         width:100%;
         padding:0;
         position:absolute;
-        height :calc(var(--vh)- 90px);
+        height: calc(var(--vh, 1vh) * 100 - 90px);
         overflow-y: auto;
         }
    
