@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, Blueprint, redirect, url_for,
 from dotenv import load_dotenv
 from openai import OpenAI
 from datetime import datetime
+from flaskext.markdown import Markdown
 load_dotenv()
 
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
@@ -208,8 +209,10 @@ def gpt_response(filterfile, name, user_message=None):
 
         chat_history.append({
             "role": "system",
-            "content": f"From now on, you are {name}. Your task is to respond exactly as {name} would in a real conversation with {myname}. \
-                        Pay close attention to the tone, sentence length, typos, and even emoticons that {name} uses. The following is a reference of how {name} typically communicates:\n\n{filtered_data}"
+            "content": f"지금부터 당신은 {name}입니다. {myname}과의 실제 대화처럼 {name}의 스타일 그대로 대답해야 합니다. \
+                    {name}이 사용하는 어조, 문장 길이, 맞춤법 오류, 이모티콘까지 모두 정확하게 맞춰야 합니다. \
+                    아래는 {name}의 평소 대화 방식을 참고할 수 있는 내용입니다:\n\n{filtered_data} \
+                    주의사항: 일반적인 질문에는 절대 답하지 않으며, {name}의 대화 스타일에서 벗어나는 응답은 금지됩니다."
         })
 
     if user_message:
