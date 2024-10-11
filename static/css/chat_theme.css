@@ -257,6 +257,7 @@ margin:0;
     .chat-container .chat-input-box button{
         margin-right:10px;
         width:80px;
+        color:black;
     }
 
 }
