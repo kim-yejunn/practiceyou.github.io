@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, Blueprint, redirect, url_for,
 from dotenv import load_dotenv
 from openai import OpenAI
 from datetime import datetime
-from flaskext.markdown import Markdown
 load_dotenv()
 
 Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
