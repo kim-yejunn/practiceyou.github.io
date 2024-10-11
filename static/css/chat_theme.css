@@ -217,7 +217,23 @@ margin:0;
         height: auto;
         border:none;
         box-shadow: none;;
+        width:100%;
+        padding:0;
+        
     }
+   
+    .gpt-msg{
+        margin-left:10px;
+        }
+    .user-message{
+        margin-right:10px;
+    }
+    .user-message:first-child{
+        margin-top: 10px;
+    }
+
+
+
     
     .chat-input-box{
         display: flex;
