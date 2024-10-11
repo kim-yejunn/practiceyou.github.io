@@ -57,7 +57,10 @@ if(windowInnerHeight > viewportHeight){ // 키보드 ON
     const viewportScrollY = parseInt(e.target.offsetTop);
     // IOS에서는 사용하지 않고 확인용으로만 👀
     // viewport scroll 값을 계산한다면 사용할 수 있습니다.
-  }
+  }// 가상 영역까지 스크롤 내려가는 것을 방지
+if(window.scrollY + visualViewport.height > document.body.offsetHeight - 2){ 
+    window.scrollTo(0, document.body.offsetHeight - visualViewport.height-1);
+}
 
 
 
