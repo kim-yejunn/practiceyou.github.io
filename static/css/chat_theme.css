@@ -209,13 +209,14 @@ margin:0;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         position:fixed;
-        width:max-content;
+        width:100%;
 
     }
 
-    .chat-container{
+    .chat-container #chat-box{
         height: auto;
         border:none;
+        box-shadow: none;;
     }
     
     .chat-input-box{
@@ -227,6 +228,6 @@ margin:0;
         border-bottom-right-radius: 20px;
         position:fixed;
         bottom:0;
-        width:max-content;
+        width:100%;
     }
 }
