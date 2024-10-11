@@ -7,18 +7,21 @@ function setViewportHeight() {
     // 뷰포트 높이를 계산하여 CSS 변수로 설정
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
 }setViewportHeight();
+
+
+
+
 // 이벤트 리스너 추가
+
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
-
-
-
-
-
 function adjustChatBoxHeight() {
-    const viewportHeight = window.innerHeight;
-    chatBox.style.height = `${viewportHeight - form.offsetHeight}px`;
+    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    const profileHeight = document.querySelector('.gpt-profile').offsetHeight;
+    const inputBoxHeight = document.querySelector('.chat-input-box').offsetHeight;
+
+    chatBox.style.height = `${viewportHeight - profileHeight - inputBoxHeight}px`;
 }
 
 // 초기 높이 설정
@@ -26,9 +29,9 @@ adjustChatBoxHeight();
 
 // 이벤트 리스너 추가
 window.addEventListener('resize', adjustChatBoxHeight);
+window.visualViewport.addEventListener('resize', adjustChatBoxHeight);
 userMessage.addEventListener('focus', adjustChatBoxHeight);
 userMessage.addEventListener('blur', adjustChatBoxHeight);
-
 
 
 
