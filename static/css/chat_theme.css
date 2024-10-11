@@ -248,8 +248,15 @@ margin:0;
         width:100%;
         border-radius: 0;
     }
+    .chat-container .chat-input-box form{
+        width:100%;
+    }
+    .chat-container .chat-input-box input{
+        width: calc(100% - 100px);
+    }
     .chat-container .chat-input-box button{
         margin-right:10px;
+        width:80px;
     }
 
 }
