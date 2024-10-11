@@ -211,6 +211,7 @@ margin:0;
         position:fixed;
         width:100%;
         border-radius: 0;
+        top:0;
 
     }
 
@@ -221,7 +222,6 @@ margin:0;
         padding:0;
         position:fixed;
         height: calc(100% - 90px);
-        top:0;
     }
    
     .gpt-msg{
