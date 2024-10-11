@@ -17,9 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
             if (data.success) {
-                window.location.href = '/fileupload/result';
+                window.location.href = '/fileupload/result'; // 성공 시 알림 없이 이동
+            } else {
+                alert(data.message); // 실패 시에만 알림 표시
             }
         })
         .catch(error => {
