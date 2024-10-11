@@ -211,6 +211,7 @@ margin:0;
         border-radius: 0;
         top:0;
         left: 0;
+        z-index: 1000; /* 다른 요소들보다 위에 표시되도록 z-index 설정 */
 
     }
 
@@ -222,6 +223,7 @@ margin:0;
         position:absolute;
         height: calc(var(--vh, 1vh) * 100 - 90px);
         overflow-y: auto;
+        
         }
    
     .gpt-msg{
