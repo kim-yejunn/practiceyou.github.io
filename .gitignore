@@ -11,3 +11,4 @@ node_modules/dotenv/lib/cli-options.js
 node_modules/dotenv/config.js
 node_modules/dotenv/config.d.ts
 *.json
+*.csv

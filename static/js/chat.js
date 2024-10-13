@@ -75,7 +75,7 @@ form.addEventListener('submit', function (e) {
         // 사용자 메시지 표시 (오른쪽)
         const userDiv = document.createElement('div');
         userDiv.className = 'user-message';
-        userDiv.innerText = message;
+        userDiv.textContent = message; // innerText 대신 textContent 사용
         chatBox.appendChild(userDiv);
         chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -90,7 +90,7 @@ form.addEventListener('submit', function (e) {
         .then(response => response.json())
         .then(data => {
             // GPT 응답을 한 문장씩 나누어 출력
-            const sentences = data.reply.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/g); // 문장 단위로 분리
+            const sentences = data.reply.split(/(?<=\.|\?|!|\n)\s+/g); // 문장 단위로 분리 (주요 구두점과 개행 문자 기준)
             sentences.forEach((sentence, index) => {
                 setTimeout(() => {
                     // "입력 중..." 말풍선 표시
@@ -117,7 +117,7 @@ form.addEventListener('submit', function (e) {
                         // GPT 메시지 추가
                         const gptDiv = document.createElement('div');
                         gptDiv.className = 'gpt-message';
-                        gptDiv.innerText = sentence.trim();
+                        gptDiv.textContent = sentence.trim(); // innerText 대신 textContent 사용하여 이모티콘 문제 해결
                         gptMsgDiv.appendChild(gptDiv);
 
                         // gpt-msg를 chatBox에 추가
