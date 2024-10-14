@@ -1,4 +1,4 @@
-
+*.txt
 .env
 *.md
 node_modules/dotenv/package.json

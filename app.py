@@ -338,6 +338,7 @@ def create_app():
 
     return app
 
+app = create_app()  # <-- 전역 범위에서 app 객체 생성
+
 if __name__ == '__main__':
-    app = create_app()
     app.run('0.0.0.0', port=9005, debug=True)
