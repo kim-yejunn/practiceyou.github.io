@@ -1,6 +1,7 @@
 # practice_you
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/df721135-96df-48fe-91b6-07824d03b51c)
+
 
 
 - 카카오톡 대화 내용을 토대로 상대와의 대화를 추출
