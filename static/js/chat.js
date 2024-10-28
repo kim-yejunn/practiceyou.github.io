@@ -90,8 +90,12 @@ form.addEventListener('submit', function (e) {
         .then(response => response.json())
         .then(data => {
             // GPT 응답을 한 문장씩 나누어 출력
-            const sentences = data.reply.split(/(?<=\.|\?|!|\n)\s+/g); // 문장 단위로 분리 (주요 구두점과 개행 문자 기준)
-            sentences.forEach((sentence, index) => {
+            if (data && data.reply) {
+                const sentences = data.reply.split(/(?<=\.|\?|!|\n)\s+/g);
+                // 나머지 코드 실행
+            } else {
+                console.error('Error: data.reply is undefined or null.');
+            }            sentences.forEach((sentence, index) => {
                 setTimeout(() => {
                     // "입력 중..." 말풍선 표시
                     const typingIndicator = document.createElement('div');
