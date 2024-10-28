@@ -5,7 +5,7 @@ from openai import OpenAI
 from datetime import datetime
 load_dotenv()
 
-Upload_Folder = os.path.join(os.path.dirname(__file__), 'upload')
+Upload_Folder = os.path.join(os.path.dirname(__file__), '/tmp/upload')
 client = OpenAI(api_key=os.getenv('api_key'))
 
 # 사용자별 폴더 생성
