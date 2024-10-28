@@ -6,7 +6,7 @@ from datetime import datetime
 load_dotenv()
 
 Upload_Folder = os.path.join(os.path.dirname(__file__), '/tmp/upload')
-client = OpenAI(api_key=os.getenv('api_key'))
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # 사용자별 폴더 생성
 def create_user_folder(name, myname):
