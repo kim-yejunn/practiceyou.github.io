@@ -1,13 +1,4 @@
 *.txt
 .env
-*.md
-node_modules/dotenv/package.json
-node_modules/dotenv/LICENSE
-node_modules/dotenv/lib/main.js
-node_modules/dotenv/lib/main.d.ts
-node_modules/dotenv/lib/env-options.js
-node_modules/dotenv/lib/cli-options.js
-node_modules/dotenv/config.js
-node_modules/dotenv/config.d.ts
 *.json
 *.csv
