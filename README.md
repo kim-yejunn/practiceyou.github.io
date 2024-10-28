@@ -6,4 +6,4 @@
 - **카카오톡** 대화 내용을 토대로 **상대와의 대화를 추출**
 - **Gpt API**를 활용하여 **카카오톡 대화 기반 챗봇 생성**
 
-### [너랑🌟연습](regional-marita-blackbean-d44743a0.koyeb.app/)
+### [너랑🌟연습](https://regional-marita-blackbean-d44743a0.koyeb.app/)
