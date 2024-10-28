@@ -18,5 +18,3 @@
 <img width="200" src="https://github.com/user-attachments/assets/13e1aa68-4ca2-4ff9-a694-44b13e6d37c7"></img>
 <img width="200" src="https://github.com/user-attachments/assets/5264a3a4-7773-4c8c-b4e4-7164076aad28"></img>
 </div>
-
-![화면-기록-2024-10-21-오후-4 12 46-_online-video-cutter com_-_1_](https://github.com/user-attachments/assets/5264a3a4-7773-4c8c-b4e4-7164076aad28)
